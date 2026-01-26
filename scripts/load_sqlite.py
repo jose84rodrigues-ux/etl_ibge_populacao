@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CAMINHO_CSV = BASE_DIR / "data" / "processed" / "populacao_tratada.csv"
 CAMINHO_DB = BASE_DIR / "database" / "populacao.db"
 
+
 def main():
     # 1. Ler CSV tratado
     df = pd.read_csv(CAMINHO_CSV)
@@ -32,6 +33,7 @@ def main():
 
     print("✅ Load concluído com sucesso!")
     print(f"📊 Total de registros carregados: {total.iloc[0,0]}")
+
 
 if __name__ == "__main__":
     main()

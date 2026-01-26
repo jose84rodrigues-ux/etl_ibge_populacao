@@ -1,21 +1,34 @@
 import pandas as pd
 from pathlib import Path
 
+# Diretórios base
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CAMINHO_ENTRADA = BASE_DIR / "data" / "raw" / "populacao_ibge_raw.csv"
-CAMINHO_SAIDA = BASE_DIR / "data" / "processed" / "populacao_ibge_tratada.csv"
+CAMINHO_RAW_ENTRADA = BASE_DIR / "data" / "raw" / "populacao_ibge_raw.csv"
+CAMINHO_RAW_SAIDA   = BASE_DIR / "data" / "raw" / "populacao_ibge_extracted.csv"
+
 
 def main():
+    print("🔍 Lendo dados brutos...")
+
     df = pd.read_csv(
-        CAMINHO_ENTRADA,
+        CAMINHO_RAW_ENTRADA,
         sep=";",
         encoding="latin1",
-        on_bad_lines="skip"
+        engine="python"
     )
 
-    df.to_csv(CAMINHO_SAIDA, index=False)
-    print("✅ Extract concluído!")
+    print(f"📥 Registros lidos: {df.shape[0]}")
+
+    # Salvando saída do extract
+    df.to_csv(
+        CAMINHO_RAW_SAIDA,
+        index=False,
+        encoding="utf-8-sig"
+    )
+
+    print(f"✅ Extract concluído! Arquivo salvo em:\n{CAMINHO_RAW_SAIDA}")
+
 
 if __name__ == "__main__":
     main()
