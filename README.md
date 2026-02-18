@@ -14,28 +14,29 @@ para análise SQL.
 
 Raw → Transform → Processed → SQLite → SQL
 
----
 
 
-
-
+```  
 etl_ibge_populacao/
 │
 ├── data/
-│ ├── raw/
-│ └── processed/
+│   ├── raw/
+│   └── processed/
 │
 ├── scripts/
-│ ├── transform_populacao.py
-│ ├── load_sqlite.py
-│ └── view_sqlite.py
+│   ├── transform_populacao.py
+│   ├── load_sqlite.py
+│   └── view_sqlite.py
 │
 ├── requirements.txt
 └── README.md
+```
 
 
 
----
+
+
+
 
 
 
