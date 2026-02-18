@@ -14,6 +14,9 @@ para análise SQL.
 
 Raw → Transform → Processed → SQLite → SQL
 
+---
+
+
 
 
 etl_ibge_populacao/
@@ -33,6 +36,8 @@ etl_ibge_populacao/
 
 
 ---
+
+
 
 ## ⚙️ Tecnologias Utilizadas
 
