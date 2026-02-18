@@ -1,22 +1,5 @@
-# Ambiente virtual
 venv/
-.env/
-
-# Arquivos de banco de dados
-database/
-*.db
-*.sqlite
-*.sqlite3
-
-# Dados processados e temporários
-data/processed/
-data/raw/*.csv
-
-# Cache e arquivos Python
 __pycache__/
+*.db
 *.pyc
-
-# Configurações de SO e editor
-.vscode/
-.DS_Store
-Thumbs.db
+data/raw/

@@ -1,38 +1,25 @@
-import pandas as pd
 import sqlite3
+import pandas as pd
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-CAMINHO_CSV = BASE_DIR / "data" / "processed" / "populacao_tratada.csv"
-CAMINHO_DB = BASE_DIR / "database" / "populacao.db"
+CAMINHO_PROCESSED = BASE_DIR / "data" / "processed" / "populacao_tratada.csv"
+CAMINHO_DB = BASE_DIR / "data" / "populacao.db"
 
 
 def main():
-    # 1. Ler CSV tratado
-    df = pd.read_csv(CAMINHO_CSV)
+    print("🔄 Carregando dados tratados no SQLite...")
 
-    # 2. Conectar ao SQLite
+    df = pd.read_csv(CAMINHO_PROCESSED)
+
     conn = sqlite3.connect(CAMINHO_DB)
 
-    # 3. Carregar dados no banco
-    df.to_sql(
-        name="populacao_ibge",
-        con=conn,
-        if_exists="replace",
-        index=False
-    )
-
-    # 4. Validação simples
-    total = pd.read_sql(
-        "SELECT COUNT(*) AS total_registros FROM populacao_ibge",
-        conn
-    )
+    df.to_sql("populacao", conn, if_exists="replace", index=False)
 
     conn.close()
 
-    print("✅ Load concluído com sucesso!")
-    print(f"📊 Total de registros carregados: {total.iloc[0,0]}")
+    print("✅ Dados carregados com sucesso!")
+    print("📊 Total inserido:", len(df))
 
 
 if __name__ == "__main__":
