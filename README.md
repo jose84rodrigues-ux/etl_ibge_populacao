@@ -1,127 +1,68 @@
-# 📊 ETL – População IBGE (Projeto de Engenharia de Dados)
+# ETL - População IBGE
 
-## 📌 Visão Geral
+Projeto de Engenharia de Dados utilizando Python, Pandas e SQLite.
 
-Este projeto tem como objetivo demonstrar um **pipeline ETL (Extract, Transform, Load)** aplicado a dados populacionais do IBGE, utilizando uma base de dados **fictícia**, com foco em boas práticas de **Engenharia de Dados** para portfólio profissional.
+## 🎯 Objetivo
 
-O pipeline realiza:
-
-* Extração de dados brutos (CSV)
-* Tratamento e padronização dos dados
-* Carga em um banco de dados SQLite
+Construir um pipeline ETL para tratar dados públicos do IBGE,
+eliminando registros inválidos e disponibilizando os dados
+para análise SQL.
 
 ---
 
-## 🧱 Arquitetura do Projeto
+## 🏗 Arquitetura do Projeto
 
-```
+Raw → Transform → Processed → SQLite → SQL
+
+
+
 etl_ibge_populacao/
 │
 ├── data/
-│   ├── raw/            # Dados brutos (não versionados)
-│   └── processed/      # Dados tratados
+│ ├── raw/
+│ └── processed/
 │
 ├── scripts/
-│   ├── extract_populacao.py   # Extração dos dados
-│   ├── transform_populacao.py # Transformação dos dados
-│   └── load_sqlite.py          # Carga no banco SQLite
+│ ├── transform_populacao.py
+│ ├── load_sqlite.py
+│ └── view_sqlite.py
 │
-├── database/           # Banco de dados SQLite gerado
-├── venv/               # Ambiente virtual (ignorado no Git)
-├── requirements.txt    # Dependências do projeto
-├── .gitignore
+├── requirements.txt
 └── README.md
-```
+
+
 
 ---
 
-## 🔄 Pipeline ETL
+## ⚙️ Tecnologias Utilizadas
 
-### 1️⃣ Extract
-
-* Leitura de arquivo CSV da camada `data/raw`
-* Validação básica de estrutura
-
-### 2️⃣ Transform
-
-* Padronização de nomes de colunas
-* Conversão de tipos de dados
-* Limpeza e organização dos registros
-* Geração do arquivo tratado em `data/processed`
-
-### 3️⃣ Load
-
-* Leitura do CSV tratado
-* Criação de tabela no SQLite
-* Inserção dos dados no banco
+- Python
+- Pandas
+- SQLite
+- Git
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🔄 Pipeline
 
-* **Python 3.11**
-* **Pandas**
-* **SQLite**
-* **Git & GitHub**
-* **VS Code**
+### 1️⃣ Transformação
+- Leitura da camada raw
+- Tratamento de encoding
+- Remoção de linhas inválidas
+- Conversão de tipos
+- Salvamento na camada processed
+
+### 2️⃣ Load
+- Inserção dos dados tratados no SQLite
+
+### 3️⃣ Análise
+- Consultas SQL para ranking e crescimento populacional
 
 ---
 
-## 🚀 Como Executar o Projeto
-
-### 1️⃣ Clonar o repositório
+## 🚀 Como Executar
 
 ```bash
-git clone https://github.com/seu-usuario/etl_ibge_populacao.git
-cd etl_ibge_populacao
-```
-
-### 2️⃣ Criar e ativar ambiente virtual (opcional, recomendado)
-
-```bash
-python -m venv venv
-venv\Scripts\activate  # Windows
-```
-
-### 3️⃣ Instalar dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4️⃣ Executar o pipeline ETL
-
-```bash
-python scripts/extract_populacao.py
 python scripts/transform_populacao.py
 python scripts/load_sqlite.py
-```
-
----
-
-## 📂 Dados
-
-* Os dados utilizados são **fictícios**, inspirados em dados públicos do IBGE
-* Arquivos brutos não são versionados por boas práticas
-
----
-
-## 📈 Possíveis Evoluções
-
-* Automação com Airflow
-* Testes de qualidade de dados
-* Integração com Power BI
-* Deploy em cloud (AWS / GCP)
-
----
-
-## 👨‍💻 Autor
-
-**José Rodrigues**
-Projeto desenvolvido para fins de estudo e portfólio em Engenharia de Dados.
-
----
-
-## 📝 Licença
-
-Este projeto é de uso educacional e demonstrativo.
+python scripts/view_sqlite.py
