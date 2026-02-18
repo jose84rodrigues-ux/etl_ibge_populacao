@@ -24,3 +24,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    import sqlite3
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+CAMINHO_DB = BASE_DIR / "data" / "populacao.db"
+
+
+def main():
+    conn = sqlite3.connect(CAMINHO_DB)
+
+    query = """
+    SELECT *
+    FROM populacao
+    ORDER BY ano, municipio
+    """
+
+    df = pd.read_sql_query(query, conn)
+
+    print(df)
+
+    conn.close()
+
+
+if __name__ == "__main__":
+    main()
